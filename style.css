@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    background: linear-gradient(35deg, darkcyan, azure, azure, cadetblue);
+}
+
+.nav {
+    height: 8vh;
+    width: calc(100 - 16)vw;
+    background-color: cadetblue;
+    padding: 5px 8vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    margin: 0;
+    color: azure;
+}
+
+.search {
+    /* padding: 8px 8px;
+    background-color: azure;
+    border-radius: 20vw; */
+    display: flex;
+    align-items: center;
+}
+
+.search input {
+    border-radius: 20vw 0 0 20vw;
+    border: 1px solid black;
+    height: 30px;
+    padding: 5px 15px;
+    background: azure;
+    border-color: darkcyan;
+}
+
+.search button {
+    height: 30px;
+    width: 30px;
+    border-radius: 0 20vw 20vw 0;
+    border: 1px solid black;
+    border-left: 0;
+    background: darkcyan;
+    border-color: darkcyan;
+}
+
+.favorite {
+    background: azure;
+    position: relative;
+    width: 17px;
+    height: 15px;
+    transform: rotate(-45deg);
+}
+
+.favorite::before {
+    content: "";
+    position: absolute;
+    width: 17px;
+    height: 15px;
+    background: azure;
+    border-radius: 50%;
+    top: -9px;
+    left: 0;
+}
+
+.favorite::after {
+    content: "";
+    position: absolute;
+    width: 17px;
+    height: 15px;
+    background: azure;
+    border-radius: 50%;
+    left: 9px;
+    top: 0;
+}
+
+.main {
+    height: 100vh;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    background: cadetblue;
+    padding: 5px 8vw;
+    color: azure;
+}
