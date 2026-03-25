@@ -1,22 +1,23 @@
 body {
     margin: 0;
     font-family: 'Courier New', Courier, monospace;
-    background: linear-gradient(35deg, darkcyan, azure, azure, cadetblue);
+    background: azure;
 }
 
 .nav {
     height: 8vh;
     width: calc(100 - 16)vw;
-    background-color: cadetblue;
+    background-color: azure;
     padding: 5px 8vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0px 1px 10px -4px black;
 }
 
 .logo {
     margin: 0;
-    color: azure;
+    color: darkcyan;
 }
 
 .search {
@@ -31,6 +32,7 @@ body {
     border-radius: 20vw 0 0 20vw;
     border: 1px solid black;
     height: 30px;
+    width: 400px;
     padding: 5px 15px;
     background: azure;
     border-color: darkcyan;
@@ -47,7 +49,7 @@ body {
 }
 
 .favorite {
-    background: azure;
+    background: darkcyan;
     position: relative;
     width: 17px;
     height: 15px;
@@ -59,7 +61,7 @@ body {
     position: absolute;
     width: 17px;
     height: 15px;
-    background: azure;
+    background: darkcyan;
     border-radius: 50%;
     top: -9px;
     left: 0;
@@ -70,20 +72,20 @@ body {
     position: absolute;
     width: 17px;
     height: 15px;
-    background: azure;
+    background: darkcyan;
     border-radius: 50%;
     left: 9px;
     top: 0;
 }
 
 .main {
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .footer {
     display: flex;
     justify-content: space-between;
-    background: cadetblue;
+    background: darkcyan;
     padding: 5px 8vw;
     color: azure;
 }
