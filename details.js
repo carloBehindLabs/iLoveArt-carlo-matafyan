@@ -33,13 +33,14 @@ function createDetails(artwork) {
     let artwork_type = document.getElementById("artwork-type");
     artwork_type.innerText = artwork.artwork_type_title;
 
-    details.appendChild(artwork_type);
-    details.appendChild(artist_display);
-    details.appendChild(date_display);
-    details.appendChild(img);
-    details.appendChild(favorite);
-    details.appendChild(title);
-    details.appendChild(description);
+    
+    // details.appendChild(title);
+    // details.appendChild(description);
+    // details.appendChild(img);
+    // details.appendChild(artwork_type);
+    // details.appendChild(favorite);
+    // details.appendChild(artist_display);
+    // details.appendChild(date_display);
 
     return details;
 }
