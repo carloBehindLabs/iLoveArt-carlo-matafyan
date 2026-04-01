@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>I Love Art</title>
+    <link rel="stylesheet" href="./details.css">
+    <title>Details - I Love Art</title>
 </head>
 <body>
     <div class="nav">
@@ -16,8 +16,15 @@
         <div class="favorite"></div>
     </div>
     <div class="main">
-        <div class="filter"></div>
-        <div class="artworks"></div>
+        <div id="artwork-details" class="artwork-details">
+            <button id="cardFavorite" class="cardFavorite">Add to Favorites</button>
+            <h1 id="artwork-title">Artwork Title</h1>
+            <p id="artwork-description" class="description">Artwork Description</p>
+            <p id="artwork-artist">Artist Name</p>
+            <p id="artwork-date">Date Display</p>
+            <img id="artwork-image" src="" alt="Artwork Image">
+            <p id="artwork-type">Artwork Type</p>
+        </div>
     </div>
     <div class="footer">
         <p>&copy; <script>document.write(new Date().getFullYear())</script> I Love Art. All rights reserved.</p>
@@ -27,6 +34,6 @@
             <a href="#">Contact</a>
         </p>
     </div>
-    <script src="./main.js"></script>
+    <script src="./details.js"></script>
 </body>
 </html>

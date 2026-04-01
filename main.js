@@ -25,9 +25,9 @@ function createCard(artwork) {
     let img = document.createElement("img");
     img.src = URL;
     img.alt = artwork.title.split(" ")[0];
-    let favorit = document.createElement("button");
-    favorit.className = "favorit";
-    favorit.id = "favorit";
+    let favorite = document.createElement("button");
+    favorite.className = "cardFavorite";
+    favorite.id = "cardFavorite";
     let title = document.createElement("h5");
     title.className = "title";
     title.textContent = artwork.artist_title;
@@ -35,10 +35,11 @@ function createCard(artwork) {
     description.className = "description";
     description.textContent = artwork.title.split(" ").splice(0, 12).join(" ");
     let details = document.createElement("a");
-    details.href = `/${artwork.id}`;
+    details.innerText = "View Details";
+    details.href = `/details.html?id=${artwork.id}`;
 
     top.appendChild(img);
-    top.appendChild(favorit);
+    top.appendChild(favorite);
     bottom.appendChild(title);
     bottom.appendChild(description);
     bottom.appendChild(details);
@@ -50,6 +51,8 @@ function createCard(artwork) {
 
 async function getArtworks() {
     const API_URL = "https://api.artic.edu/api/v1/artworks?page=1&limit=12&fields=id,title,artist_title,date_display,image_id,thumbnail,artwork_type_title,is_public_domain";
+    console.log("url: ", window.location.search);
+
     return fetch(API_URL, {
         headers: {
             'Content-Type': 'application/json',
