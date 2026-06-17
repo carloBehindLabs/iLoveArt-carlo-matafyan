@@ -1,4 +1,4 @@
-let allArtworks = [];
+let allFavorites = [];
 
 async function main() {
     const logo = document.getElementById("logo");
@@ -19,39 +19,51 @@ async function main() {
         });
     }
 
-    const artworks = await getArtworks();
-    allArtworks = artworks.data || [];
-    const artworkElement = document.getElementsByClassName("artworks");
+    const favoriteIds = JSON.parse(localStorage.getItem("favorites")) || [];
     
-    allArtworks.forEach((item) => {
-        let newCard = createCard(item);
-        artworkElement[0].appendChild(newCard);
-        setupFavoriteButton(item.id);
-    });
+    if (favoriteIds.length === 0) {
+        const container = document.getElementById("favorites-container");
+        container.innerHTML = "<p>No favorite artworks yet. <a href='./index.html'>Go back to browse artworks</a></p>";
+        return;
+    }
 
-    console.log("artworks: ", artworks);
+    const favoriteContainer = document.getElementById("favorites-container");
+    
+    for (const id of favoriteIds) {
+        try {
+            const artwork = await getArtworkDetails(id);
+            allFavorites.push(artwork.data);
+            const card = createCard(artwork.data);
+            favoriteContainer.appendChild(card);
+            setupFavoriteButton(id);
+        } catch (error) {
+            console.error(`Error fetching artwork ${id}:`, error);
+        }
+    }
+
+    console.log("Favorite artworks loaded:", allFavorites);
 }
 
 function performSearch() {
     const searchInput = document.getElementById("searchInput");
     const searchTerm = searchInput.value.toLowerCase();
-    const artworkElement = document.getElementsByClassName("artworks");
+    const favoriteContainer = document.getElementById("favorites-container");
     
-    artworkElement[0].innerHTML = "";
+    favoriteContainer.innerHTML = "";
     
-    const filteredArtworks = allArtworks.filter((artwork) => {
+    const filteredArtworks = allFavorites.filter((artwork) => {
         return artwork.title.toLowerCase().includes(searchTerm) || 
                artwork.artist_title.toLowerCase().includes(searchTerm);
     });
     
     if (filteredArtworks.length === 0) {
-        artworkElement[0].innerHTML = "<p>No artworks found matching your search.</p>";
+        favoriteContainer.innerHTML = "<p>No favorites found matching your search.</p>";
         return;
     }
     
     filteredArtworks.forEach((item) => {
-        let newCard = createCard(item);
-        artworkElement[0].appendChild(newCard);
+        const card = createCard(item);
+        favoriteContainer.appendChild(card);
         setupFavoriteButton(item.id);
     });
 }
@@ -118,21 +130,27 @@ function setupFavoriteButton(artworkId) {
             let favoritesArr = JSON.parse(localStorage.getItem("favorites")) || [];
             const id = ev.target.closest("button").value;
             
-            if (favoritesArr.includes(id)) {
-                favoritesArr = favoritesArr.filter((favId) => favId !== id);
-            } else {
-                favoritesArr.push(id);
-            }
+            // Remove from favorites
+            favoritesArr = favoritesArr.filter((favId) => favId !== id);
             localStorage.setItem("favorites", JSON.stringify(favoritesArr));
+            
+            // Remove card from DOM
+            const card = button.closest(".card");
+            card.remove();
+            
+            // Check if there are any favorites left
+            const container = document.getElementById("favorites-container");
+            if (container.children.length === 0) {
+                container.innerHTML = "<p>No favorite artworks yet. <a href='./index.html'>Go back to browse artworks</a></p>";
+            }
+            
             console.log("Favorites updated:", favoritesArr);
         });
     }
 }
 
-async function getArtworks() {
-    const API_URL = "https://api.artic.edu/api/v1/artworks?page=1&limit=12&fields=id,title,artist_title,date_display,image_id,thumbnail,artwork_type_title,is_public_domain";
-    console.log("url: ", window.location.search);
-
+async function getArtworkDetails(id) {
+    const API_URL = `https://api.artic.edu/api/v1/artworks/${id}?fields=id,title,artist_title,artist_display,date_display,place_of_origin,description,short_description,medium_display,dimensions,credit_line,publication_history,exhibition_history,provenance_text,artwork_type_title,department_title,classification_title,material_titles,style_titles,subject_titles,image_id,alt_image_ids,is_zoomable`;
     return fetch(API_URL, {
         headers: {
             'Content-Type': 'application/json',

@@ -8,12 +8,17 @@
 </head>
 <body>
     <div class="nav">
-        <h2 class="logo">I &lt;3 Art</h2>
+        <h2 class="logo" id="logo">I &lt;3 Art</h2>
         <div class="search">
-            <input type="search">
-            <button></button>
+            <input type="search" id="searchInput" placeholder="Search artworks...">
+            <button id="searchBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </button>
         </div>
-        <div class="favorite"></div>
+        <a href="./index.html" class="favorite-link">Favorites</a>
     </div>
     <div class="main">
         <div id="artwork-details" class="artwork-details">
